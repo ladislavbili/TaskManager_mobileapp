@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {AppRegistry, Text,TextInput,View,StyleSheet} from 'react-native';
 import SingleAuthorization from './componentSingleAuthorization';
 import { Button } from 'react-native-elements';
+import { Container, Footer, Content } from 'native-base';
 const mockData=[
   {name:'Michael',role:"role 1"},
   {name:'Mathew',role:"role 2"},
@@ -20,7 +21,8 @@ export default class Authorization extends Component{
   }
   render(){
     return(
-    <View style={{flex:1}}>
+    <Container>
+      <Content>
       {
         this.state.employeeData.map((material, i) => (
           <SingleAuthorization
@@ -29,13 +31,14 @@ export default class Authorization extends Component{
           />
         ))
     }
-    <View style={styles.addButton}>
+    </Content>
+    <Footer style={{backgroundColor: 'white'}}>
       <Button
         title='+ User'
         onPress={() => this.addUser.bind(this)}
       />
-    </View>
-  </View>)
+    </Footer>
+  </Container>)
   }
 
 }

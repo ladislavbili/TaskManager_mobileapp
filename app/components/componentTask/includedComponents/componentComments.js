@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {AppRegistry,Text,View,TextInput,StyleSheet,ListView} from 'react-native';
 import { Button } from 'react-native-elements';
-
+import { Container, Footer, Content } from 'native-base';
 
 
 const mockData=[
@@ -59,25 +59,28 @@ export default class Comments extends Component{
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let comments=ds.cloneWithRows(this.state.commentData);
     return(
-      <View style={styles.Main}>
-        <ListView
-            style={styles.ListStyle}
-            dataSource={comments}
-            renderRow={this.renderComment.bind(this)}
-        />
-
-        <View style={styles.SubmitComment}>
-          <TextInput
-           placeholder="Enter Comment"
-           value={this.state.inputText}
-           onChangeText={(value) => this.updateInput(value)}
-           />
-          <Button
-            title='SUBMIT COMMENT'
-            onPress={() => this.submitComment()}
+      <Container>
+        <Content>
+          <ListView
+              style={styles.ListStyle}
+              dataSource={comments}
+              renderRow={this.renderComment.bind(this)}
           />
-        </View>
-      </View>
+        </Content>
+        <Footer style={{height:110,backgroundColor: 'white', }}>
+          <View style={{flex:1,flexDirection:'column',}}>
+            <TextInput
+             placeholder="Enter Comment"
+             value={this.state.inputText}
+             onChangeText={(value) => this.updateInput(value)}
+             />
+            <Button
+              title='SUBMIT COMMENT'
+              onPress={() => this.submitComment()}
+            />
+          </View>
+        </Footer>
+      </Container>
     )
   }
 

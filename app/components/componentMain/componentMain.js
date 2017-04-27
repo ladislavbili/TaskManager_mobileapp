@@ -1,9 +1,12 @@
 import React,{Component} from 'react';
-import {AppRegistry, Text,View,StyleSheet,Navigator,TouchableHighlight} from 'react-native';
+import {AppRegistry, Text,View,StyleSheet,Navigator,TouchableHighlight,ScrollView} from 'react-native';
+import {List,ListItem,Button } from 'react-native-elements';
+import { Container, Header, Content } from 'native-base';
+
+
 import Project from './../componentProject/componentProject';
 import Task from './../componentTask/componentTask';
 import Folder from './../componentFolder/componentFolder';
-import { Button } from 'react-native-elements';
 import TopMenu from './componentTopMenu';
 
 const mockFolders=['DO IT','SCHEDULED','DONE','REPEATED']
@@ -21,86 +24,86 @@ export default class Main extends Component{
   }
   renderScene(route, navigator){
    switch(route.id){
-    case 'Project':
-      return (
-        <View style={styles.isFlexed}>
-          <TopMenu NowIn='Project' navigator={navigator}/>
-          <View style={styles.topComponent}>
-            <Project/>
-          </View>
-        </View>)
 
     case 'Task':
-    return (
-      <View style={styles.isFlexed}>
-        <TopMenu NowIn='Task' navigator={navigator}/>
-        <View style={styles.topComponent}>
-          <Task/>
-        </View>
-      </View>)
+      return (
+        <Task mainNavigator={navigator}/>
+    )
+    case 'Project':
+      return (
+        <Project mainNavigator={navigator}/>
+    )
     case 'Folder':
       return (
-        <View style={styles.isFlexed}>
-          <TopMenu NowIn='Folder' navigator={navigator}/>
-          <View style={styles.topComponent}>
+        <Container>
+          <Header style={{backgroundColor: 'white',}}>
+            <TopMenu NowIn='Folder' navigator={navigator}/>
+          </Header>
+          <Content>
             <Folder navigator={navigator}/>
-          </View>
-        </View>)
+          </Content>
+      </Container>
+      )
     case 'Main':
+    //pre vykreslenie lokálnych obrázkov treba použiť avatar={require('../images/avatar1.jpg')}
       return (
-        <View style={styles.isFlexed}>
-          <TopMenu NowIn='Main' navigator={navigator}/>
-          <View style={styles.isFlexed}>
-            <View style={styles.topElement}>
-              {
-                this.state.folders.map((folder, i) => (
-                  <TouchableHighlight
-                    onPress={()=>navigator.push({id:'Folder'})}>
-                    <View>
-                      <Text>{folder}</Text>
-                    </View>
-                  </TouchableHighlight>
-                ))
-              }
-            </View>
-            <View style={styles.hasBorder}>
-            <Text>PROJECTS</Text>
-            {
-              this.state.projects.map((project, i) => (
-                <TouchableHighlight
-                  onPress={()=>navigator.push({id:'Project'})}>
-                  <View>
-                    <Text>{project}</Text>
-                  </View>
-                </TouchableHighlight>
-              ))
-            }
-            </View>
-            <View style={styles.hasBorder}>
-              <Text>KONTEXT</Text>
-              {
-                this.state.kontext.map((kontext, i) => (
-                  <TouchableHighlight>
-                    <View>
-                      <Text>{kontext}</Text>
-                    </View>
-                  </TouchableHighlight>
-                ))
-              }
-            </View>
-            <TouchableHighlight>
-              <View>
-                <Text>ARCHIVED</Text>
-              </View>
-            </TouchableHighlight>
-            <View style={styles.addButton}>
-              <Button
-                title='+'
-              />
-            </View>
-          </View>
-        </View>
+        <Container>
+          <Header style={{backgroundColor: 'white',}}>
+              <TopMenu NowIn='Main' navigator={navigator}/>
+          </Header>
+          <Content>
+              <List containerStyle={{marginBottom: 20}}>
+                {
+                  this.state.folders.map((folder, i) => (
+                    <ListItem
+                      key={i}
+                      avatar={{uri:"http://icon-park.com/imagefiles/folder_icon_green.png"}}
+                      title={folder}
+                      onPress={()=>navigator.push({id:'Folder'})}
+                    />
+                  ))
+                }
+              </List>
 
+              <View style={styles.hasBorder}>
+              {
+                this.state.projects.map((project, i) => (
+                  <ListItem
+                    key={i}
+                    avatar={{uri:"https://maxcdn.icons8.com/Share/icon/Logos//ms_project1600.png"}}
+                    title={project}
+                    onPress={()=>navigator.push({id:'Folder'})}
+                  />
+                ))
+              }
+              </View>
+              <View style={styles.hasBorder}>
+                {
+                  this.state.projects.map((kontext, i) => (
+                    <ListItem
+                      key={i}
+                      avatar={{uri:"https://cdn0.iconfinder.com/data/icons/ux-metods-01/100/UX_icon-11-512.png"}}
+                      title={kontext}
+                      onPress={()=>navigator.push({id:'Folder'})}
+                    />
+                  ))
+                }
+              </View>
+              <View style={{marginTop:3,}}>
+                <Button
+                onPress={()=>navigator.push({
+                    id:'Project'
+                  })}
+                  title='Add project'
+                />
+              </View>
+              <View style={{marginTop:3,}}>
+                <Button
+                  title='Add task'
+                />
+              </View>
+          </Content>
+      </Container>
       )
    }
  }
@@ -117,29 +120,33 @@ export default class Main extends Component{
   }
 }
 const styles = StyleSheet.create({
-  isFlexed: {
-    flex:1,
-  },
-  hasBorder:{
-    borderWidth:2,
-    borderColor: "#000000",
-  },
-  topElement:{
-    borderWidth:2,
-    borderColor: "#000000",
-    marginTop:50,
-  },
-  topComponent:{
-    flex:1,
-    marginTop:50,
-  },
+    isFlexed: {
+      flex:1,
+      margin:5,
+    },
+    hasBorder:{
+      borderBottomWidth:2,
+      borderColor: "#000000",
+    },
+    topElement:{
+      borderBottomWidth:2,
+      borderColor: "#000000",
+      marginTop:50,
+    },
+    topComponent:{
+      flex:1,
+      marginTop:50,
+    },
 
-  addButton: {
-    position: 'absolute',
-    right:10,
-    bottom:10,
-    padding:3
-  },
-}
+    addButton: {
+      position: 'absolute',
+      right:10,
+      bottom:10,
+      padding:3
+    },
+    titles:{
+      fontSize: 20,
+    },
+  }
 );
 AppRegistry.registerComponent('Main',()=> Main);

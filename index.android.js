@@ -5,7 +5,7 @@ import Task from './app/components/componentTask/componentTask';
 import Folder from './app/components/componentFolder/componentFolder';
 import Main from './app/components/componentMain/componentMain';
 
-export default class prototype extends Component{
+export default class TaskManager_mobileapp extends Component{
   render(){
     return(
       <Main />
@@ -13,4 +13,4 @@ export default class prototype extends Component{
   }
 }
 
-AppRegistry.registerComponent('prototype',()=> prototype);
+AppRegistry.registerComponent('TaskManager_mobileapp',()=> TaskManager_mobileapp);

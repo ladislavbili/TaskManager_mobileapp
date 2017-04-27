@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {AppRegistry, Text,View,StyleSheet,Navigator,TouchableHighlight} from 'react-native';
 import SingleMaterial from './componentSingleMaterial';
 import AddMaterial from './componentAddMaterial';
+import {Button } from 'react-native-elements';
+import { Container, Header, Content,Footer,Right } from 'native-base';
 
 const mockData=[
   {name:'Keyboard',unit:5,price:5},
@@ -32,8 +34,8 @@ export default class Material extends Component{
    switch(route.id){
     case 'Material':
       return(
-        <View style={styles.Navig}>
-          <View>
+        <Container>
+          <Content>
           {
             this.state.productData.map((material, i) => (
               <SingleMaterial
@@ -46,17 +48,22 @@ export default class Material extends Component{
         }
 
         <Text>Total price:{this.state.totalSum}</Text>
-        </View>
-        <View style={styles.addButton}>
-        <TouchableHighlight
-          style={styles.pressableButton}
-          onPress={()=>navigator.push({
-              id:'addMaterial'
-          })}>
-            <Text>Add item</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+        </Content>
+
+        <Footer style={{backgroundColor: 'white',}}>
+          <Right>
+            <Button
+              style={styles.pressableButton}
+              title='Add item'
+              onPress={()=>navigator.push({
+                  id:'addMaterial'
+              })}
+            />
+          </Right>
+
+        </Footer>
+
+      </Container>
       )
     case 'addMaterial':
       return (
@@ -68,12 +75,14 @@ export default class Material extends Component{
 
 render(){
   return(
+    <Container>
       <Navigator
           style={styles.Navig}
           initialRoute={{id: 'Material'}}
           renderScene={this.renderScene.bind(this)}
           configureScreen={(route, routeStack) => Navigator.SceneConfigs.FloatFromRight}
         />
+      </Container>
   )
 
 

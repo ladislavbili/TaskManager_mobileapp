@@ -45,12 +45,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.prototype",
+    package = "com.taskmanager_mobileapp",
 )
 
 android_resource(
     name = "res",
-    package = "com.prototype",
+    package = "com.taskmanager_mobileapp",
     res = "src/main/res",
 )
 

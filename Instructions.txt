@@ -1,0 +1,54 @@
+
+Ako spustiť:
+Možnosť 1 (na mobile): Používateľ priamo premiestni do svojho zariadenia app-debug.apk zo zložky android\app\build\outputs\apk (obsahuje poslednú zbuildovanú aplikáciu)
+
+Možnosť 2 (virtuálne zariadenie):
+  Inštalácia:
+    Nainštalovať Javu aj JDK
+    Prejsť celý tutorial: https://facebook.github.io/react-native/docs/getting-started.html až po "Using real device"
+    Nezabudnite nastaviť v Start - Computer(Right Click) - Properties - Advanced system settings - Environment Variables - System Variables nasledovné hodnoty:
+    ANDROID_HOME = Cesta k Android JDK, najčastejšie C:\Users\[Meno používateľa]\AppData\Local\Android\sdk
+    JAVA_HOME = Cesta k Java JDK, najčastejšie C:\Program Files\Java\jdk[verzia JDK]\
+    Na aplikovanie týcho premenných je potrebné sa buď odhlásiť a prihlásiť z používateľa Windows, alebo reštartovať počítač!
+  Spustenie:
+    (Poznámka: príkazy spúšťajte bez úvodzoviek)
+    Spustite Android virtuálne zariadenie v Android Štúdiu.
+    Na spustenie projektu je potrebné najprv zo zložky projektu (TaskManager_mobileapp) spustiť v konzole príkaz `react-native start`.
+    Po správe "Loading dependency graph, done." nechajte konzolu bežať a otvorte novú konzolu kam napíšte `react-native run-android`.
+    (Nepovinné) Ak chcete log z Android zariadenia napíšte do konzole `react-native log-android`.
+
+Debugging:
+  Ak nastane chyba s node_modules skúste vymazať zložku node_modules a spustiť v konzole príkaz `npm install`
+  Ak to nepomohlo a error správa je nezrozumiteľná, poslednou možnosťou je vytvoriť nový projekt. Nemažte pôvodnú zložku (môžete ju premenovať ale potom aplikácia v tejto určite nepôjde), keďže z nej bude potrebné presunúť komponenty.
+  Na vytvorenie prázdnej aplikácie spustite príkaz `react-native init [meno aplikácie]` v našom prípade `react-native init TaskManager_mobileapp`.
+  Následne nainštalujte všetky dependencies týmito príkazmi v TOMTO PORADÍ:
+  npm i react-native-elements --save
+  npm i react-native-vector-icons --save
+  react-native link react-native-vector-icons
+  npm install react-native-star-rating --save
+  npm install react-native-checkbox --save
+  npm install native-base --save
+  react-native link native-base
+  npm install react-native-datepicker --save
+  npm install
+
+  Potom skopírujte z pôvodnej zložky zložku app, index.android.js a index.ios.js. Aplikácia by mala byť znova spustiteľná pôvodnými príkazmi
+
+Doplnok:
+
+  Všetky príkazy:
+    react-native init         //generuje prázdnu mobilnú aplikáciu
+    npm install               //stiahne všetky node-modules dependecies
+    react-native start        //spustí samotnú aplikáciu
+    react-native run-android  //spustí automatické načítanie aplikácie na android zariadení
+    react-native log-android  //v konzole zobrazí hlásenia zariadenia android
+
+    Dependencies/ príkazy na ich inštaláciu (defaultne už obsiahnuté):
+    npm i react-native-elements --save
+    npm i react-native-vector-icons --save
+    react-native link react-native-vector-icons
+    npm install react-native-star-rating --save
+    npm install react-native-checkbox --save
+    npm install native-base --save
+    react-native link native-base
+    npm install react-native-datepicker --save
