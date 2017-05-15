@@ -1,3 +1,17 @@
+@Brano
+Upravy pre git clone
+Pridanie do .gitignore adresare
+node_modules
+android
+ios
+
+Postup spustenia appky v android  git clone
+1. Instalacia node modules
+yarn install
+2. Instalácia android a ios adresarov pre appku
+react-native upgrade
+3.Spustenie appky v simulatore android
+react-native run-android
 
 Ako spustiť:
 Možnosť 1 (na mobile): Používateľ priamo premiestni do svojho zariadenia app-debug.apk zo zložky android\app\build\outputs\apk (obsahuje poslednú zbuildovanú aplikáciu)
